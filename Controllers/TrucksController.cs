@@ -1,12 +1,9 @@
-﻿using System;
+﻿using CedTruck.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CadTruck.Models;
-using CedTruck;
 
 namespace CedTruck.Controllers
 {
@@ -34,7 +31,7 @@ namespace CedTruck.Controllers
             }
 
             var truck = await _context.Trucks
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (truck == null)
             {
                 return NotFound();
@@ -88,7 +85,7 @@ namespace CedTruck.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("id,model,yearFabrication,yearModel")] Truck truck)
         {
-            if (id != truck.id)
+            if (id != truck.Id)
             {
                 return NotFound();
             }
@@ -102,7 +99,7 @@ namespace CedTruck.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TruckExists(truck.id))
+                    if (!TruckExists(truck.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +122,7 @@ namespace CedTruck.Controllers
             }
 
             var truck = await _context.Trucks
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (truck == null)
             {
                 return NotFound();
@@ -147,7 +144,7 @@ namespace CedTruck.Controllers
 
         private bool TruckExists(long id)
         {
-            return _context.Trucks.Any(e => e.id == id);
+            return _context.Trucks.Any(e => e.Id == id);
         }
     }
 }

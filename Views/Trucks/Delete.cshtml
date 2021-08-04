@@ -1,4 +1,4 @@
-﻿@model CadTruck.Models.Truck
+﻿@model CedTruck.Models.Truck
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,27 +12,27 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.model)
+            @Html.DisplayNameFor(model => model.Model)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.model)
+            @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.yearFabrication)
+            @Html.DisplayNameFor(model => model.YearFabrication)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.yearFabrication)
+            @Html.DisplayFor(model => model.YearFabrication)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.yearModel)
+            @Html.DisplayNameFor(model => model.YearModel)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.yearModel)
+            @Html.DisplayFor(model => model.YearModel)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="id" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
