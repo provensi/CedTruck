@@ -9,6 +9,6 @@ namespace CedTruck
         {
 
         }
-        public DbSet<Truck> trucks { get; set; }
+        public DbSet<Truck> Trucks { get; set; }
     }
 }

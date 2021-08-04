@@ -22,7 +22,7 @@ namespace CedTruck.Controllers
         // GET: Trucks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.trucks.ToListAsync());
+            return View(await _context.Trucks.ToListAsync());
         }
 
         // GET: Trucks/Details/5
@@ -33,7 +33,7 @@ namespace CedTruck.Controllers
                 return NotFound();
             }
 
-            var truck = await _context.trucks
+            var truck = await _context.Trucks
                 .FirstOrDefaultAsync(m => m.id == id);
             if (truck == null)
             {
@@ -73,7 +73,7 @@ namespace CedTruck.Controllers
                 return NotFound();
             }
 
-            var truck = await _context.trucks.FindAsync(id);
+            var truck = await _context.Trucks.FindAsync(id);
             if (truck == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace CedTruck.Controllers
                 return NotFound();
             }
 
-            var truck = await _context.trucks
+            var truck = await _context.Trucks
                 .FirstOrDefaultAsync(m => m.id == id);
             if (truck == null)
             {
@@ -139,15 +139,15 @@ namespace CedTruck.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var truck = await _context.trucks.FindAsync(id);
-            _context.trucks.Remove(truck);
+            var truck = await _context.Trucks.FindAsync(id);
+            _context.Trucks.Remove(truck);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TruckExists(long id)
         {
-            return _context.trucks.Any(e => e.id == id);
+            return _context.Trucks.Any(e => e.id == id);
         }
     }
 }
