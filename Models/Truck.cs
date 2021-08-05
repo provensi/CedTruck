@@ -15,5 +15,7 @@ namespace CedTruck.Models
         [Display(Name = "Model Year")]
         public DateTime YearModel { get; set; }
 
+
+
     }
 }

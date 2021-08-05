@@ -11,7 +11,7 @@ namespace CedTruck.Validator
     {
         public CreateTruckValidator()
         {
-            RuleFor(x => x.Model).NotNull().WithMessage("Model is required");
+            //RuleFor(x => x.Model).NotNull().WithMessage("Model is required");
             RuleFor(x => x.YearFabrication).Must(IsOnDate).WithMessage("Date has to be more then now");
             RuleFor(x => x.YearModel).Must(IsOnDate).WithMessage("Date has to be more then now");
         }

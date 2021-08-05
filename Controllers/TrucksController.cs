@@ -42,10 +42,12 @@ namespace CedTruck.Controllers
 
             return View(truck);
         }
-
+        
         // GET: Trucks/Create
         public IActionResult Create()
         {
+            ViewBag.TruckModels = _context.TruckModels.ToList();
+
             return View();
         }
 
@@ -56,6 +58,7 @@ namespace CedTruck.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,YearFabrication,YearModel")] Truck truck)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(truck);
