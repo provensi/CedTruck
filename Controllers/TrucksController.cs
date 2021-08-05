@@ -46,7 +46,7 @@ namespace CedTruck.Controllers
         // GET: Trucks/Create
         public IActionResult Create()
         {
-            ViewBag.TruckModels = _context.TruckModels.ToList();
+            ViewBag.TruckModels = new SelectList(_context.TruckModels.ToList(), "Id", "Model");
 
             return View();
         }
@@ -56,7 +56,7 @@ namespace CedTruck.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,YearFabrication,YearModel")] Truck truck)
+        public async Task<IActionResult> Create([Bind("Id,Model,YearFabrication,YearModel")] Truck truck)
         {
 
             if (ModelState.IsValid)
