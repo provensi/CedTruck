@@ -1,9 +1,12 @@
-﻿using CedTruck.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using CedTruck;
+using CedTruck.Models;
 
 namespace CedTruck.Controllers
 {
@@ -51,7 +54,7 @@ namespace CedTruck.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,model,yearFabrication,yearModel")] Truck truck)
+        public async Task<IActionResult> Create([Bind("Id,YearFabrication,YearModel")] Truck truck)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +86,7 @@ namespace CedTruck.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("id,model,yearFabrication,yearModel")] Truck truck)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Model,YearFabrication,YearModel")] Truck truck)
         {
             if (id != truck.Id)
             {

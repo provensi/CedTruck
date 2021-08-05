@@ -1,3 +1,7 @@
+using CedTruck.Models;
+using CedTruck.Validator;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +26,8 @@ namespace CedTruck
         {
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["Data:ConnectionStrings:DefaultConnection"]));
+            services.AddControllers().AddFluentValidation();
+            services.AddTransient<IValidator<Truck>, CreateTruckValidator>();
            
         }
 
