@@ -16,3 +16,5 @@ Foi feito apenas um modelo de teste unitário no projeto com o test result gerad
 
 Em outro projeto de Test eu apresento um modelo padrão de Test gerado pelo Nunit automaticamente para a classe TruckController, mas sem a implementação dos metodos de teste.
 
+EDIT 06/06/21: Novos testes feitos.
+
