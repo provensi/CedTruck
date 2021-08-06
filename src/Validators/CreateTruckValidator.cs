@@ -2,7 +2,7 @@
 using FluentValidation;
 using System;
 
-namespace CedTruck.Validator
+namespace CedTruck.Validators
 {
     public class CreateTruckValidator : AbstractValidator<Truck>
     {
@@ -22,7 +22,8 @@ namespace CedTruck.Validator
         public bool ValidateYearModel(int YearModel)
         {
             var currentYear = DateTime.Now.Year;
-            return currentYear.CompareTo(YearModel) <= 0;
+            var nextYear = DateTime.Now.AddYears(1).Year;
+            return currentYear.CompareTo(YearModel) <= 0 && nextYear.CompareTo(YearModel) >= 0;
         }
     }
 }

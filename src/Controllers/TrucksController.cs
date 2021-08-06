@@ -7,36 +7,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CedTruck;
 using CedTruck.Models;
+using CedTruck.Services;
+using CedTruck.Services.Interfaces;
 
 namespace CedTruck.Controllers
 {
     public class TrucksController : Controller
     {
         private readonly DataContext _context;
+        private readonly ITrucksService _trucksService;
 
-        public TrucksController(DataContext context)
+        public TrucksController(DataContext context, ITrucksService trucksService)
         {
             _context = context;
+            _trucksService = trucksService;
         }
 
         // GET: Trucks
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var dataContext = _context.Trucks.Include(t => t.Model);
-            return View(await dataContext.ToListAsync());
+            var trucksList = _trucksService.GetAll(); //_context.Trucks.Include(t => t.Model);
+            return View(trucksList);
         }
 
         // GET: Trucks/Details/5
-        public async Task<IActionResult> Details(long? id)
+        public IActionResult Details(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var truck = _trucksService.GetById(id);
 
-            var truck = await _context.Trucks
-                .Include(t => t.Model)
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (truck == null)
             {
                 return NotFound();
@@ -48,7 +46,7 @@ namespace CedTruck.Controllers
         // GET: Trucks/Create
         public IActionResult Create()
         {
-            ViewData["ModelId"] = new SelectList(_context.TruckModels, "Id", "Model");
+            ViewData["ModelId"] = new SelectList(_trucksService.GetAllTruckModels(), "Id", "Model");
             return View();
         }
 
@@ -65,23 +63,20 @@ namespace CedTruck.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModelId"] = new SelectList(_context.TruckModels, "Id", "Model", truck.ModelId);
+            ViewData["ModelId"] = new SelectList(_trucksService.GetAllTruckModels(), "Id", "Model", truck.ModelId);
             return View(truck);
         }
 
         // GET: Trucks/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public IActionResult Edit(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var truck = _trucksService.GetById(id);
 
-            var truck = await _context.Trucks.FindAsync(id);
             if (truck == null)
             {
                 return NotFound();
             }
+
             ViewData["ModelId"] = new SelectList(_context.TruckModels, "Id", "Model", truck.ModelId);
             return View(truck);
         }
@@ -107,7 +102,7 @@ namespace CedTruck.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TruckExists(truck.Id))
+                    if (null == _trucksService.GetById(truck.Id))
                     {
                         return NotFound();
                     }
@@ -118,21 +113,15 @@ namespace CedTruck.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModelId"] = new SelectList(_context.TruckModels, "Id", "Model", truck.ModelId);
+            ViewData["ModelId"] = new SelectList(_trucksService.GetAllTruckModels(), "Id", "Model", truck.ModelId);
             return View(truck);
         }
 
         // GET: Trucks/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        public IActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var truck = _trucksService.GetById(id);
 
-            var truck = await _context.Trucks
-                .Include(t => t.Model)
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (truck == null)
             {
                 return NotFound();
@@ -144,17 +133,11 @@ namespace CedTruck.Controllers
         // POST: Trucks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public IActionResult DeleteConfirmed(long id)
         {
-            var truck = await _context.Trucks.FindAsync(id);
-            _context.Trucks.Remove(truck);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            _trucksService.DeleteById(id);
 
-        private bool TruckExists(long id)
-        {
-            return _context.Trucks.Any(e => e.Id == id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
