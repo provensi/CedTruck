@@ -1,8 +1,12 @@
 # CedTruck
 
-Foi usado para a validação do formulário o framework FluentValidation, separado na pasta /Validators
+Foi usado para a validação do formulário o framework FluentValidation, separado na pasta /Validators.
 
-Migrate configurado para rodar automaticamente
+Migrate configurado para rodar automaticamente.
 
-O contexto está configurado no arquivo /Models/DataContext.cs
+O contexto está configurado no arquivo /Models/DataContext.cs.
+
+A tabela TruckModel com os valores FH e FM, como descrito no caso de uso, é populada automaticamente pelo DataContext.
+
+Não foi aplicado nenhuma melhoria no estilo das páginas, ficando assim no padrão MVC default.
 
