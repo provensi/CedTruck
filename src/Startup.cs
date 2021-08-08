@@ -26,9 +26,8 @@ namespace CedTruck
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["Data:ConnectionStrings:DefaultConnection"]));
-            services.AddDbContext<DataContext>(opts => opts.UseMySql(Configuration["Data:ConnectionStrings:MySqlConnectionString"], MariaDbServerVersion.LatestSupportedServerVersion));
-
+            services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["Data:ConnectionStrings:DefaultConnection"]));
+           
             services.AddTransient<ITrucksService, TrucksService>();
 
             services.AddControllers().AddFluentValidation();
