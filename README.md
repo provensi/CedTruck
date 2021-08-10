@@ -12,9 +12,5 @@ A tabela TruckModel com os valores FH e FM, como descrito no caso de uso, é pop
 
 Não foi aplicado nenhuma melhoria no estilo das páginas, ficando assim no padrão MVC default.
 
-Foi feito apenas um modelo de teste unitário no projeto com o test result gerado pela biblioteca Run Coverlet Report.
-
-Em outro projeto de Test eu apresento um modelo padrão de Test gerado pelo Nunit automaticamente para a classe TruckController, mas sem a implementação dos metodos de teste.
-
-EDIT 06/08/21: Novos testes feitos.
+Os testes foram feitos com o XUnit e estão no projeto /XUnit.CedTruck.Tests
 
